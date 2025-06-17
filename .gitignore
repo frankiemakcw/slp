@@ -1,4 +1,5 @@
 /vendor/
 /uploads/
 /calendar/
+/old/
 .env
