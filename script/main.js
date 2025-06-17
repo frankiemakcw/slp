@@ -204,29 +204,20 @@ async function submitPDF() {
 }
 
 async function previewPDF() {
-    try {      
-        const response = await fetch('getdata_json.php');
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        const data = await response.json();
-        
-        const doc = setupPDFDocument(data);
-        generateActivitiesPage(doc, data);
-        if (data.stuClass.startsWith('3') || data.stuClass.startsWith('6')) {
-            generateReflectionsPage(doc, data);
-        }
-
-        // Get the PDF as a Blob URL
-        const blobUrl = doc.output('bloburl');
-
-        // Open the Blob URL in a new tab
-        window.open(blobUrl, '_blank');
-        
-    } catch (error) {
-        console.error('Error generating PDF:', error);
-        alert('An error occurred while generating the PDF');
+    const container = document.getElementById('data-container');
+    const data = JSON.parse(container.dataset.user);
+    
+    const doc = setupPDFDocument(data);
+    generateActivitiesPage(doc, data);
+    if (data.stuClass.startsWith('3') || data.stuClass.startsWith('6')) {
+        generateReflectionsPage(doc, data);
     }
+
+    // Get the PDF as a Blob URL
+    const blobUrl = doc.output('bloburl');
+
+    // Open the Blob URL in a new tab
+    window.open(blobUrl, '_blank');
 }
 
 function deleteActivity(id) {
