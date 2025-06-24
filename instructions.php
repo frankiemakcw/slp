@@ -56,7 +56,7 @@
             <li>Late submission or reprint incurs a <strong>$40 fee</strong>.</li>
         </ul>
         
-        <h4 style="text-align: center;">If you have any questions, please contact Mr. Mak (FM).</h4>
+        <h4 style="text-align: center;">If you have any questions, please contact Mr. Mak (FM) at fm@ywgs.edu.hk.</h4>
 
         <div class="form-actions">
             <button type="button" class="btn-blue" onClick="window.location.href='main.php'">Back</button>

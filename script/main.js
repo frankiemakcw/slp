@@ -97,25 +97,25 @@ function generateActivitiesPage(doc, data) {
             font: 'notosanstcedit', 
             fontStyle: 'normal',
             fontSize: 10,
-            cellPadding: { top: 2, right: 1.5, bottom: 2, left: 1.5 },
+            cellPadding: { top: 1, right: 1.5, bottom: 1, left: 1.5 },
             textColor: 0,
             halign: 'left' 
         },
         headStyles: {
             fillColor: false,
-            cellPadding: { top: 2, right: 1.5, bottom: 2, left: 1.5 },
+            cellPadding: { top: 1, right: 1.5, bottom: 1, left: 1.5 },
             fontStyle: 'normal',
             halign: 'left' 
         },
         alternateRowStyles: {
-            cellPadding: { top: 2, right: 1.5, bottom: 2, left: 1.5 },
+            cellPadding: { top: 1, right: 1.5, bottom: 1, left: 1.5 },
             fillColor: false
         },
         margin: { left: 18, right: 18 },
         didDrawPage: (data) => {
             // Check if the table has reached or exceeded our threshold
             if (data.cursor.y >= maxYPosition) {
-                window.alert('Warning: The activities table is too long and may overflow the designated space. Please reduce the number of activities.');
+                throw new Error('Warning: The activities table is too long and may overflow in the final PDF. Please reduce the number of activities.');
             }
         }
     });
@@ -146,7 +146,7 @@ function generateReflectionsPage(doc, data) {
 
     // Check if text will exceed available space
     if (lines.length > 43) {
-        window.alert('Warning: Your reflection is too long and may overflow the designated space. Please shorten it.');
+        throw new Error('Warning: Your reflection is too long and may overflow in the final PDF. Please shorten it.');
     }
 
     generatePDFFooter(doc);
@@ -191,26 +191,39 @@ async function submitPDF() {
             alert('SLP submitted successfully!');
             window.location.reload();
         } else {
-            alert('Submission failed: ' + result.message);
-            submitBtn.disabled = false;
-            submitBtn.textContent = 'Submit';
+            throw new Error('Submission failed: ' + result.message);
         }
     } catch (error) {
         console.error('Submission error:', error);
-        alert('An error occurred during submission');
+        alert(error.message);
         submitBtn.disabled = false;
         submitBtn.textContent = 'Submit';
     }
 }
 
-async function previewPDF() {
+function previewPDF() {
     const container = document.getElementById('data-container');
     const data = JSON.parse(container.dataset.user);
     
     const doc = setupPDFDocument(data);
-    generateActivitiesPage(doc, data);
+    
+    // Generate activities page with warning
+    try {
+        generateActivitiesPage(doc, data);
+    } catch (activitiesError) {
+        console.warn('Activities warning:', activitiesError.message);
+        alert(activitiesError.message);
+        // Continue with preview despite the warning
+    }
+
     if (data.stuClass.startsWith('3') || data.stuClass.startsWith('6')) {
-        generateReflectionsPage(doc, data);
+        try {
+            generateReflectionsPage(doc, data);
+        } catch (reflectionsError) {
+            console.warn('Reflections warning:', reflectionsError.message);
+            alert(reflectionsError.message);
+            // Continue with preview despite the warning
+        }
     }
 
     // Get the PDF as a Blob URL
