@@ -67,11 +67,15 @@
                 <input type="text" id="activity-role" name="role" list="role-list" required>
                 <datalist id="role-list">
                     <option value="Participant">
-                    <option value="Performer">
-                    <option value="Organizer">
-                    <option value="Helper">
-                    <option value="Volunteer">
                     <option value="參與者">
+                    <option value="Performer">
+                    <option value="表演者">
+                    <option value="Organizer">
+                    <option value="籌辦者">
+                    <option value="Helper">
+                    <option value="工作人員">
+                    <option value="Volunteer">
+                    <option value="義工">
                 </datalist>
             </div>
             <div class="form-actions edit-btn">

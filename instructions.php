@@ -27,7 +27,7 @@
                     <li>S2-S5: <strong>May 20<?= htmlspecialchars($start_year) ?> to Apr 20<?= htmlspecialchars($end_year) ?></strong></li>
                 </ul>
             </li>
-            <li>DO NOT include those information that will be reported by your teachers, including
+            <li><strong>DO NOT</strong> include those information that will be reported by your teachers, including
                 <ul>
                     <li>Memberships (e.g., art club member, basketball team member)</li>
                     <li>Posts (e.g., class committee chairlady)</li>
@@ -39,13 +39,13 @@
             </li>
             <li>Check spelling. Use full names and capitalize the first letter of activity and organization names.</li>
             <li>For school events, refer to the OLE calendar and write "Ying Wa Girls' School" as the organizer without specifying any departments or teachers.</li>
-            <li>You are advised to fill in at least 10 items. You may include more than 10 if you wish but ensure the items fit properly without overlapping other text. <strong>Quality is more important than quantity.</strong></li>
+            <li>You are advised to fill in at least 10 items. You may include more than 10 if you wish but ensure the items fit properly without overlapping other text. Only select meaningful activities, rather than recording all activities.<strong>Quality is more important than quantity.</strong></li>
             <li>若活動只有中文名稱，請使用中文紀錄活動籌辦者及角色。</li>
         </ul>
      
         <h3>Part II: Personal Reflections</h3>
         <ul>
-            <li>Required only for S3 & S6.</li>
+            <li><strong>Required only for S3 & S6.</strong></li>
             <li>You may write in either Chinese or English, up to approximately 500 words.</li>
             <li>Preview the PDF file to ensure that the reflections fit properly and do not overlap with other text.</li>
         </ul>
@@ -59,7 +59,7 @@
         <h4 style="text-align: center;">If you have any questions, please contact Mr. Mak (FM) at fm@ywgs.edu.hk.</h4>
 
         <div class="form-actions">
-            <button type="button" class="btn-blue" onClick="window.location.href='main.php'">Back</button>
+            <button type="button" class="btn-blue" onClick="window.location.href='main.php'">Start</button>
         </div>
     </div>
 </body>

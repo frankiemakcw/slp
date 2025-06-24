@@ -40,10 +40,22 @@
                     </select>
                 </div>
                 
+                <input type="hidden" name="sort" id="sort" value="<?= isset($_GET['sort']) ? $_GET['sort'] : '' ?>">
             </form>
         </div>
         
         <?php if (!empty($records)): ?>
+            <div class="action-buttons">
+                <?php if ($submissionStatus === 'submitted'): ?>
+                    <button id="downloadAll" class="btn">Download All Submitted Files</button>
+                <?php endif; ?>
+                <?php if ($submissionStatus === 'submitted' || $submissionStatus === 'all'): ?>
+                    <button id="sortByTime" class="btn">
+                        <?= (isset($_GET['sort']) && $_GET['sort'] === 'time_desc') ? 'Sort by Class Number' : 'Sort by Submission Time' ?>
+                    </button>
+                <?php endif; ?>
+            </div>
+            
             <table>
                 <thead>
                     <tr>

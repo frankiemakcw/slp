@@ -14,7 +14,7 @@ async function handleCredentialResponse(response) {
         console.log("Parsed data:", data); // Debug log
 
         if (data.success) {
-            window.location.href = 'main.php';
+            window.location.href = 'instructions.php';
         } else {
             alert('Login failed: ' + (data.message || 'Unknown error'));
         }

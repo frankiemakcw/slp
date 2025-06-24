@@ -99,7 +99,8 @@
 
     <div class="container">
         <p style="text-align: center;">Submitted at <?= htmlspecialchars($submissionTime) ?>.</p>
-        <p style="text-align: center;">If you would like to edit your SLP, please discard the submission first.</p>
+        <p style="text-align: center;">You are advised to download the submission for your records.</p>
+        <p style="text-align: center;">If you would like to edit your SLP, please discard the submission.</p>
         <div class="form-actions">
             <a href="<?php echo $filepath; ?>"  target="_blank">
                 <button class="btn-blue">View Submission</button>

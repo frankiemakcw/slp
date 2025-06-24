@@ -10,7 +10,7 @@ $user = $_SESSION['user'];
 
 // Extract SID from email
 $email = $user['email'];
-$sid = strtok($email, '@'); // Gets everything before '@'
+$sid = strtok($email, '@');
 
 if (strlen($sid) > 3) {
     header("Location: login.php");
@@ -22,6 +22,7 @@ try {
     // Get filters from user
     $selectedClass = $_GET['class'] ?? 'all';
     $submissionStatus = $_GET['status'] ?? 'all';
+    $sortOrder = $_GET['sort'] ?? '';
     
     // Build the query
     $sql = "SELECT stu.class, stu.class_num, stu.name, sub.file_path, sub.submitted_at
@@ -50,7 +51,13 @@ try {
     }
     
     // Add sorting
-    $sql .= " ORDER BY stu.class ASC, stu.class_num ASC";
+    $orderBy = " ORDER BY stu.class ASC, stu.class_num ASC"; // Default sorting
+
+    if ($sortOrder === 'time_desc') {
+        $orderBy = " ORDER BY sub.submitted_at DESC"; // Newest first
+    }
+
+    $sql .= $orderBy;
     
     $stmt = $pdo->prepare($sql);
     
