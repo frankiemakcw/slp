@@ -35,7 +35,7 @@ th, td {
     border-bottom: 1px solid #ddd;
 }
 th {
-    background-color: #4CAF50;
+    background-color: #1976D2;
     color: white;
     position: sticky;
     top: 0;
@@ -66,7 +66,7 @@ tr:hover {
 
 .btn {
     padding: 8px 16px;
-    background-color: #4CAF50;
+    background-color: #1976D2;
     color: white;
     border: none;
     border-radius: 4px;
@@ -75,5 +75,5 @@ tr:hover {
 }
 
 .btn:hover {
-    background-color: #45a049;
+    background-color: #145da5;
 }
