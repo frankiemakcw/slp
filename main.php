@@ -112,24 +112,12 @@
 
     <div class="container edit-btn" id="not-submitted">
         <div class="form-actions">
-            <button type="button" class="btn-blue" id="previewpdf" onclick="previewPDF()">Preview PDF</button>
+            <a href="preview/SLP_<?php echo $start_year ?><?php echo $end_year ?>_<?php echo $stuClass ?><?php echo sprintf("%02d", $stuClassNum) ?>.pdf" target="_blank">
+                <button type="button" class="btn-blue" id="previewpdf">Preview PDF</button>
+            </a>
             <button type="button" class="btn-purple" id="submitpdf" onclick="submitPDF()">Submit</button>
         </div>
     </div>
-
-    <div id="data-container" 
-        data-user='<?php echo json_encode([
-        'success' => true, 
-        'stuName' => $stuName ?? null,
-        'stuClass' => $stuClass ?? null,
-        'stuClassNum' => $stuClassNum ?? null,
-        'stuID' => $stuID ?? null,
-        'reflection' => $reflection ?? null,
-        'activities' => $activities ?? [],
-        'start_year' => $start_year ?? null,
-        'end_year' => $end_year ?? null,
-        'issue_date' => $issue_date ?? null
-    ]); ?>' ></div>
         
     <script src="script/main.js"></script>
     <script src="script/notosanstcedit-normal.js"></script>

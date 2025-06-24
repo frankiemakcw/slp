@@ -201,37 +201,46 @@ async function submitPDF() {
     }
 }
 
-function previewPDF() {
-    const container = document.getElementById('data-container');
-    const data = JSON.parse(container.dataset.user);
+async function savepreview() {
+
+    const response_info = await fetch('getdata_json.php');
+    if (!response_info.ok) {
+        throw new Error('Network response was not ok');
+    }
+    const data = await response_info.json();
     
     const doc = setupPDFDocument(data);
-    
-    // Generate activities page with warning
     try {
         generateActivitiesPage(doc, data);
     } catch (activitiesError) {
-        console.warn('Activities warning:', activitiesError.message);
-        alert(activitiesError.message);
-        // Continue with preview despite the warning
+
     }
 
     if (data.stuClass.startsWith('3') || data.stuClass.startsWith('6')) {
         try {
             generateReflectionsPage(doc, data);
         } catch (reflectionsError) {
-            console.warn('Reflections warning:', reflectionsError.message);
-            alert(reflectionsError.message);
-            // Continue with preview despite the warning
+
         }
     }
-
-    // Get the PDF as a Blob URL
-    const blobUrl = doc.output('bloburl');
-
-    // Open the Blob URL in a new tab
-    window.open(blobUrl, '_blank');
+    
+    // Generate PDF blob
+    const pdfBlob = doc.output('blob');
+    
+    // Create FormData to send
+    const formData = new FormData();
+    formData.append('pdf', pdfBlob, `slp.pdf`);
+    formData.append('student_id', data.stuID);
+    
+    // Send to server
+    const response = await fetch('save_pdf.php', {
+        method: 'POST',
+        body: formData
+    });      
+        
 }
+
+document.addEventListener('DOMContentLoaded', savepreview);
 
 function deleteActivity(id) {
     if (confirm('Are you sure you want to delete this activity?')) {
