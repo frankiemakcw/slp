@@ -12,7 +12,7 @@
     $email = $user['email'];
     $sid = strtok($email, '@'); // Gets everything before '@'
 
-    if (strlen($sid) <= 3) {
+    if (strlen($sid) <= 4) {
         header("Location: teacher.php");
         exit;
     }

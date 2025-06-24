@@ -2,7 +2,7 @@
 session_start();
 
 if (!isset($_SESSION['user'])) {
-    header('Location: login.php');
+    header('Location: index.php');
     exit;
 }
 
@@ -11,11 +11,6 @@ $user = $_SESSION['user'];
 // Extract SID from email
 $email = $user['email'];
 $sid = strtok($email, '@');
-
-if (strlen($sid) > 3) {
-    header("Location: login.php");
-    exit;
-}
 
 require_once 'dbconnect.php';
 try {
