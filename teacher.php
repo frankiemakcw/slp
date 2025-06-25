@@ -12,36 +12,41 @@
     <div class="container">
         <h1>SLP Submissions</h1>
         
-        <div class="filter-form">
-            <form method="get">
-                <div class="filter-row">
-                    <label for="class">Filter by Class:</label>
-                    <select name="class" id="class">
-                        <option value="all">All Classes</option>
-                        <?php
-                        // Get distinct classes for dropdown
-                        $classStmt = $pdo->query("SELECT DISTINCT class FROM student ORDER BY class");
-                        $classes = $classStmt->fetchAll(PDO::FETCH_COLUMN);
-                        
-                        foreach ($classes as $class) {
-                            $selected = ($class == $selectedClass) ? 'selected' : '';
-                            echo "<option value='$class' $selected>$class</option>";
-                        }
-                        ?>
-                    </select>
-                </div>
-                
-                <div class="filter-row">
-                    <label for="status">Submission Status:</label>
-                    <select name="status" id="status">
-                        <option value="all" <?= $submissionStatus === 'all' ? 'selected' : '' ?>>All Students</option>
-                        <option value="submitted" <?= $submissionStatus === 'submitted' ? 'selected' : '' ?>>Submitted</option>
-                        <option value="not_submitted" <?= $submissionStatus === 'not_submitted' ? 'selected' : '' ?>>Not Submitted</option>
-                    </select>
-                </div>
-                
-                <input type="hidden" name="sort" id="sort" value="<?= isset($_GET['sort']) ? $_GET['sort'] : '' ?>">
-            </form>
+        <div class="filter-form-container">
+            <div class="filter-form">
+                <form method="get">
+                    <div class="filter-row">
+                        <label for="class">Filter by Class:</label>
+                        <select name="class" id="class">
+                            <option value="all">All Classes</option>
+                            <?php
+                            // Get distinct classes for dropdown
+                            $classStmt = $pdo->query("SELECT DISTINCT class FROM student ORDER BY class");
+                            $classes = $classStmt->fetchAll(PDO::FETCH_COLUMN);
+                            
+                            foreach ($classes as $class) {
+                                $selected = ($class == $selectedClass) ? 'selected' : '';
+                                echo "<option value='$class' $selected>$class</option>";
+                            }
+                            ?>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-row">
+                        <label for="status">Submission Status:</label>
+                        <select name="status" id="status">
+                            <option value="all" <?= $submissionStatus === 'all' ? 'selected' : '' ?>>All Students</option>
+                            <option value="submitted" <?= $submissionStatus === 'submitted' ? 'selected' : '' ?>>Submitted</option>
+                            <option value="not_submitted" <?= $submissionStatus === 'not_submitted' ? 'selected' : '' ?>>Not Submitted</option>
+                        </select>
+                    </div>
+                    
+                    <input type="hidden" name="sort" id="sort" value="<?= isset($_GET['sort']) ? $_GET['sort'] : '' ?>">
+                </form>
+            </div>
+            <div class="logout-container">
+                <a href="logout.php" class="logout-btn">Log Out</a>
+            </div>
         </div>
         
         <?php if (!empty($records)): ?>
