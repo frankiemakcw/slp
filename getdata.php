@@ -21,7 +21,7 @@
     require_once 'dbconnect.php';
 
     // Query the student table for name
-    $stmt = $pdo->prepare("SELECT `name`, `class`, `class_num` FROM `student` WHERE sid = ?");
+    $stmt = $pdo->prepare("SELECT `name`, `class`, `class_num`, `preview_id` FROM `student` WHERE sid = ?");
     $stmt->execute([$sid]);
     $studentData = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -44,6 +44,7 @@
     $stuName = strtoupper($studentData['name']);
     $stuClass = strtoupper($studentData['class']);
     $stuClassNum = $studentData['class_num'];
+    $previewID = $studentData['preview_id'];
     $stuID = strtoupper($sid);
     $reflection = $reflectionData['reflection'] ?? "";
     $is_submitted = !empty($submission);

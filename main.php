@@ -112,7 +112,7 @@
 
     <div class="container edit-btn" id="not-submitted">
         <div class="form-actions">
-            <a href="preview/SLP_<?php echo $start_year ?><?php echo $end_year ?>_<?php echo $stuClass ?><?php echo sprintf("%02d", $stuClassNum) ?>.pdf" target="_blank">
+            <a href="preview/SLP_preview_<?php echo $start_year ?><?php echo $end_year ?>_<?php echo $stuClass ?><?php echo sprintf("%02d", $stuClassNum) ?>_<?php echo $previewID ?>.pdf" target="_blank">
                 <button type="button" class="btn-blue" id="previewpdf">Preview PDF</button>
             </a>
             <button type="button" class="btn-purple" id="submitpdf" onclick="submitPDF()">Submit</button>

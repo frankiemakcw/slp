@@ -236,7 +236,7 @@ async function savepreview() {
     formData.append('student_id', data.stuID);
     
     // Send to server
-    const response = await fetch('save_pdf.php', {
+    const response = await fetch('save_preview.php', {
         method: 'POST',
         body: formData
     });      
