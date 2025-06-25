@@ -1,6 +1,5 @@
 /vendor/
-/uploads/
+/submitted/
 /calendar/
 /preview/
-/old/
 .env

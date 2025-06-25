@@ -55,7 +55,6 @@ function setupPDFDocument(data) {
 // Common function to generate activities page
 function generateActivitiesPage(doc, data) {
     const { activities } = data;
-    const maxYPosition = 235; // Set your maximum Y position threshold
     
     generatePDFHeader(doc, data);
     
@@ -63,12 +62,14 @@ function generateActivitiesPage(doc, data) {
     doc.text('PART I: ACTIVITIES / PROGRAMMES / COMPETITIONS', 15, 55);
 
     // claim
-    doc.text('I hereby declare that I have participated in the activities above.', 18, 240);
-    doc.line(18, 233.5, 192, 233.5);
-    doc.line(18, 234, 192, 234);
+    doc.text('I hereby declare that I have participated in the activities above.', 18, 245);
+    doc.line(18, 239.5, 192, 239.5);
+    doc.line(18, 239, 192, 239);
 
     // Draw rectangle
     doc.rect(15, 60, 180, 190, 'S');
+
+    generatePDFFooter(doc);
     
     // Prepare table data
     const tableData = activities
@@ -114,12 +115,12 @@ function generateActivitiesPage(doc, data) {
         margin: { left: 18, right: 18 },
         didDrawPage: (data) => {
             // Check if the table has reached or exceeded our threshold
-            if (data.cursor.y >= maxYPosition) {
-                throw new Error('Warning: The activities table is too long and may overflow in the final PDF. Please reduce the number of activities.');
+            if (data.cursor.y >= 239) {
+                throw new Error('Warning: Too many activities. Please preview the PDF and reduce the number of activities.');
             }
         }
     });
-    generatePDFFooter(doc);
+    
 }
 
 // Common function to generate reflections page
@@ -135,6 +136,8 @@ function generateReflectionsPage(doc, data) {
     // Draw rectangle
     doc.rect(15, 60, 180, 190, 'S');
 
+    generatePDFFooter(doc);
+
     // Reflection
     doc.text(reflection, 20, 68, {
         maxWidth: 170,
@@ -143,13 +146,13 @@ function generateReflectionsPage(doc, data) {
 
     // Calculate approximate number of lines the reflection will take
     const lines = doc.splitTextToSize(reflection, 170);
-
+    
     // Check if text will exceed available space
     if (lines.length > 43) {
-        throw new Error('Warning: Your reflection is too long and may overflow in the final PDF. Please shorten it.');
+        throw new Error('Warning: Your reflection is too long. Please preview the PDF and shorten the reflection.');
     }
 
-    generatePDFFooter(doc);
+    
 }
 
 async function submitPDF() {

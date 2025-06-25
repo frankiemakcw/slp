@@ -17,13 +17,13 @@ try {
     }
     
     // Create uploads directory if it doesn't exist
-    if (!file_exists('uploads')) {
-        mkdir('uploads', 0755, true);
+    if (!file_exists('submitted')) {
+        mkdir('submitted', 0755, true);
     }
     
     // Generate unique filename
     $filename = 'SLP_' . $start_year . $end_year . '_' . $stuClass . sprintf("%02d", $stuClassNum) . '_' . (new DateTime('now +8 hours'))->format('YmdHis') . '.pdf';
-    $filepath = 'uploads/' . $filename;
+    $filepath = 'submitted/' . $filename;
     
     // Move uploaded file
     if (!move_uploaded_file($_FILES['pdf']['tmp_name'], $filepath)) {

@@ -46,7 +46,7 @@ document.getElementById('eca-form').addEventListener('submit', function(e) {
     }
     
     // Submit the form
-    fetch('exe_edit_activity.php', {
+    fetch('update_activity.php', {
         method: 'POST',
         body: formData
     })
