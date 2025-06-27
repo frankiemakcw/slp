@@ -7,11 +7,8 @@ async function handleCredentialResponse(response) {
             },
             body: JSON.stringify({ credential: response.credential })
         });
-
-        console.log("Server response:", serverResponse); // Debug log
         
         const data = await serverResponse.json();
-        console.log("Parsed data:", data); // Debug log
 
         if (data.success) {
             window.location.href = 'instructions.php';
