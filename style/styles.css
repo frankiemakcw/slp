@@ -12,8 +12,11 @@ h2 {
 }
 
 .container {
-    width: 90%;
-    max-width: 800px;
+    width: 95%;
+    max-width: 1200px;
+    min-width: 500px;
+    margin-inline: auto;
+    padding-inline: 1rem;
     background-color: white;
     padding: 20px;
     margin: 0 auto 25px;
@@ -292,4 +295,31 @@ li {
 .deadline {
     color: #e74c3c;
     font-weight: bold;
+}
+
+.activity-table {
+    min-width: 500px;
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+.activity-table th,
+.activity-table td {
+    padding: 8px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+.activity-table thead tr {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+.activity-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.activity-table tbody tr:hover {
+    background-color: #f1f1f1;
 }

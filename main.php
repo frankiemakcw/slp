@@ -57,36 +57,46 @@
     <h2>Activities</h2>
 
         <?php if (!empty($activities)): ?>
-            <div class="activities-table">
-                <?php foreach ($activities as $index => $activity): ?>
-                    <div class="activity-card">
-                        <div class="activity-row">
-                            <div class="activity-number"><?= $index + 1 ?>.</div>
-                            <div class="activity-date">
-                                <?php 
-                                $startDate = new DateTime($activity['start_date']);
-                                $endDate = new DateTime($activity['end_date']);
-                                
-                                if ($activity['start_date'] == $activity['end_date']) {
-                                    echo $startDate->format('Y/m/d');
-                                } else {
-                                    echo $startDate->format('Y/m/d').' - '.$endDate->format('Y/m/d');
-                                }
-                                ?>
-                            </div>
-                            <div class="activity-name"><?= htmlspecialchars($activity['activity_name']) ?></div>
-                            <div class="activity-organizer"><?= htmlspecialchars($activity['organizer']) ?></div>
-                            <div class="activity-role"><?= htmlspecialchars($activity['role']) ?></div>
-                        </div>
-                        <div class="activity-actions edit-btn">
-                            <button onclick="window.location.href='edit_activity.php?id=<?= $activity['id'] ?>'" class="small-btn btn-blue">Edit</button>
-                            <button onclick="deleteActivity(<?= $activity['id'] ?>)" class="small-btn btn-red">Delete</button>
-                        </div>
-                    </div>
-                <?php endforeach; ?>
-            </div>
+            <table class="activity-table">
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>Date</th>
+                        <th>Activity</th>
+                        <th>Organizer</th>
+                        <th>Role</th>
+                        <th>Modify</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php 
+                    $counter = 1;
+                    foreach ($activities as $activity): 
+                        // Format the date(s)
+                        $startDate = new DateTime($activity['start_date']);
+                        $endDate = new DateTime($activity['end_date']);
+                        
+                        $dateDisplay = $startDate->format('d/m/Y');
+                        if ($startDate != $endDate) {
+                            $dateDisplay .= ' - ' . $endDate->format('d/m/Y');
+                        }
+                    ?>
+                        <tr>
+                            <td><?= $counter++ ?>.</td>
+                            <td><?= htmlspecialchars($dateDisplay) ?></td>
+                            <td><?= htmlspecialchars($activity['activity_name']) ?></td>
+                            <td><?= htmlspecialchars($activity['organizer']) ?></td>
+                            <td><?= htmlspecialchars($activity['role']) ?></td>
+                            <td>
+                                <button onclick="window.location.href='edit_activity.php?id=<?= $activity['id'] ?>'" class="small-btn btn-blue">Edit</button>
+                                <button onclick="deleteActivity(<?= $activity['id'] ?>)" class="small-btn btn-red">Delete</button>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
         <?php else: ?>
-            <p id="no-records-message">No activities saved yet.</p>
+            <p>No activities saved yet.</p>
         <?php endif; ?>
   
         <div class="form-actions edit-btn">
