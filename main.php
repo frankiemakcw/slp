@@ -68,7 +68,7 @@
                         <th>Activity</th>
                         <th>Organizer</th>
                         <th>Role</th>
-                        <th>Modify</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -85,11 +85,11 @@
                         }
                     ?>
                         <tr>
-                            <td><?= $counter++ ?>.</td>
-                            <td><?= htmlspecialchars($dateDisplay) ?></td>
-                            <td><?= htmlspecialchars($activity['activity_name']) ?></td>
-                            <td><?= htmlspecialchars($activity['organizer']) ?></td>
-                            <td><?= htmlspecialchars($activity['role']) ?></td>
+                            <td data-label="No."><?= $counter++ ?></td>
+                            <td data-label="Date"><?= htmlspecialchars($dateDisplay) ?></td>
+                            <td data-label="Activity"><?= htmlspecialchars($activity['activity_name']) ?></td>
+                            <td data-label="Organizer"><?= htmlspecialchars($activity['organizer']) ?></td>
+                            <td data-label="Role"><?= htmlspecialchars($activity['role']) ?></td>
                             <td>
                                 <button onclick="window.location.href='edit_activity.php?id=<?= $activity['id'] ?>'" class="small-btn btn-blue">Edit</button>
                                 <button onclick="deleteActivity(<?= $activity['id'] ?>)" class="small-btn btn-red">Delete</button>

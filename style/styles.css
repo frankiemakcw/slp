@@ -13,7 +13,6 @@ h2 {
 
 .container {
     max-width: 1000px;
-    min-width: 700px;
     background-color: white;
     padding: 20px;
     margin: 20px auto;
@@ -53,12 +52,46 @@ h2 {
     font-weight: bold;
 }
 
-/* show reflection on main.php */
+/* show activities */
+.activity-table {
+    border-collapse: collapse;
+    margin: 20px 0;
+    width: 100%;
+}
+
+.activity-table th,
+.activity-table td {
+    padding: 8px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+.activity-table thead tr {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+.activity-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.activity-table tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* show reflection */
 #reflection {
     font-family: Arial, sans-serif;
     white-space: pre-wrap; /* Preserve line breaks but wrap long lines */
     padding: 1em;
     line-height: 1.5;
+}
+
+/* no activities or no reflections */
+#no-records-message {
+    color: #7f8c8d;
+    text-align: center;
+    font-style: italic;
 }
 
 /* edit reflection */
@@ -147,11 +180,6 @@ button {
 
 .small-btn {
     padding: 5px 10px;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: all 0.3s ease;
 }
 
 .btn-green {
@@ -179,15 +207,6 @@ button {
 
 .btn-purple:hover {
     background-color: #771a72;
-}
-
-.btn-orange {
-    background-color: #df8143;
-    color: white;
-}
-
-.btn-orange:hover {
-    background-color: #945a23;
 }
 
 .btn-red {
@@ -222,36 +241,45 @@ li {
     font-weight: bold;
 }
 
-/* saved activities */
-.activity-table {
-    min-width: 500px;
-    width: 100%;
-    border-collapse: collapse;
-    margin: 20px 0;
-}
+@media (max-width: 600px) {
+    .action-buttons {
+        margin: 15px auto 0;
+    }
+    
+    .action-buttons button {
+        padding: 5px 10px;
+    }
 
-.activity-table th,
-.activity-table td {
-    padding: 8px;
-    text-align: left;
-    border: 1px solid #ddd;
-}
-
-.activity-table thead tr {
-    background-color: #f2f2f2;
-    font-weight: bold;
-}
-
-.activity-table tbody tr:nth-child(even) {
-    background-color: #f9f9f9;
-}
-
-.activity-table tbody tr:hover {
-    background-color: #f1f1f1;
-}
-
-#no-records-message {
-    color: #7f8c8d;
-    text-align: center;
-    font-style: italic;
+    .activity-table {
+        display: block;
+        width: 100%;
+    }
+    
+    .activity-table thead {
+        display: none;
+    }
+    
+    .activity-table tr {
+        display: block;
+        margin-bottom: 1rem;
+        border: 1px solid #ddd;
+    }
+    
+    .activity-table td {
+        display: block;
+        text-align: left;
+        padding-left: 100px;
+        position: relative;
+        border: none;
+        border-bottom: 1px solid #eee;
+    }
+    
+    .activity-table td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 1rem;
+        text-align: left;
+        font-weight: bold;
+        width: 95px; 
+    }
 }
