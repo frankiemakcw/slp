@@ -17,9 +17,10 @@
 </head>
 <body>
 
-    <h2>Personal Reflections</h2>
+    
    
     <div class="container">
+        <h2>Personal Reflections</h2>
         <textarea id="reflectionText" placeholder="Type your reflection here..." spellcheck="true"><?php 
             if (isset($reflectionData['reflection'])) {
                 echo htmlspecialchars(trim($reflectionData['reflection']), ENT_QUOTES, 'UTF-8');

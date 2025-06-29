@@ -40,9 +40,10 @@
     <link rel="stylesheet" href="style/styles.css">
 </head>
 <body>
-    <h2>Edit Activity</h2>
+    
    
     <div class="container">
+        <h2>Edit Activity</h2>
         <form id="eca-form" action="update_activity.php" method="POST">
             <input type="hidden" name="id" value="<?= htmlspecialchars($activity['id']) ?>">
             

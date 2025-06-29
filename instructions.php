@@ -11,8 +11,8 @@
     <link rel="stylesheet" href="style/styles.css">
 </head>
 <body>
-    <h2>Student Learning Profile (SLP) Instructions</h2>
     <div class="container">
+        <h2>Student Learning Profile (SLP) Instructions</h2>
         <h3>Purposes</h3>
         <ul>
             <li>To serve as evidence of your holistic development during secondary school</li>

@@ -17,9 +17,10 @@
 </head>
 <body>
 
-    <h2>New Activity</h2>
+    
    
     <div class="container">
+        <h2>New Activity</h2>
         <form id="eca-form" action="save_activity.php" method="POST">
             <div class="form-group date-type-container">
                 <label class="date-type-label">Date Type:</label>

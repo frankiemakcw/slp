@@ -23,32 +23,35 @@
 </head>
 <body>
 
-    <h2>Ying Wa Girls' School</h2>
-    <h2>Student Learning Profile (SLP)</h2>
-    <h2>20<?= htmlspecialchars($start_year) ?>-20<?= htmlspecialchars($end_year) ?></h2>
-   
-    <div class="container container-stuinfo">
-        <div class="student-info">
-            <div class="info-item">
-                <span class="label">NAME:</span>
-                <span class="value"><?= htmlspecialchars($stuName) ?></span>
-            </div>
-            <div class="info-item">
-                <span class="label">CLASS:</span>
-                <span class="value"><?= htmlspecialchars($stuClass) ?> (<?= htmlspecialchars($stuClassNum) ?>)</span>
-            </div>
-            <div class="info-item">
-                <span class="label">STUDENT ID:</span>
-                <span class="value"><?= htmlspecialchars($stuID) ?></span>
-            </div>
+    <div class="container">
+        <div>
+            <h2>Ying Wa Girls' School</h2>
+            <h2>Student Learning Profile (SLP)</h2>
+            <h2>20<?= htmlspecialchars($start_year) ?>-20<?= htmlspecialchars($end_year) ?></h2>
         </div>
+        <div class="container-space-between">
+            <div class="student-info">
+                <div class="info-item">
+                    <span class="label">NAME:</span>
+                    <span class="value"><?= htmlspecialchars($stuName) ?></span>
+                </div>
+                <div class="info-item">
+                    <span class="label">CLASS:</span>
+                    <span class="value"><?= htmlspecialchars($stuClass) ?> (<?= htmlspecialchars($stuClassNum) ?>)</span>
+                </div>
+                <div class="info-item">
+                    <span class="label">STUDENT ID:</span>
+                    <span class="value"><?= htmlspecialchars($stuID) ?></span>
+                </div>
+            </div>
 
-        <div class="action-buttons container-rowwrap">
-            <button onclick="window.location.href='instructions.php'" class="btn-blue">Instructions</button>
-            <a href="<?php echo $pdfPath; ?>"  target="_blank">
-                <button class="btn-blue">OLE Calendar</button>
-            </a>
-            <button onclick="window.location.href='logout.php'" class="btn-red">Logout</button>
+            <div class="action-buttons">
+                <button onclick="window.location.href='instructions.php'" class="btn-blue">Instructions</button>
+                <a href="<?php echo $pdfPath; ?>"  target="_blank">
+                    <button class="btn-blue">OLE Calendar</button>
+                </a>
+                <button onclick="window.location.href='logout.php'" class="btn-red">Logout</button>
+            </div>
         </div>
 
     </div>
@@ -96,7 +99,7 @@
                 </tbody>
             </table>
         <?php else: ?>
-            <p>No activities saved yet.</p>
+            <p id="no-records-message">No activities saved yet.</p>
         <?php endif; ?>
   
         <div class="form-actions edit-btn">

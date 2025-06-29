@@ -19,11 +19,13 @@
 </head>
 <body>
 
-    <h2>Ying Wa Girls' School</h2>
-    <h2>Student Learning Profile (SLP)</h2>
-    <h2>20<?= htmlspecialchars($start_year) ?>-20<?= htmlspecialchars($end_year) ?></h2>
+    
 
     <div class="container">
+        <h2>Ying Wa Girls' School</h2>
+        <h2>Student Learning Profile (SLP)</h2>
+        <h2>20<?= htmlspecialchars($start_year) ?>-20<?= htmlspecialchars($end_year) ?></h2>
+        <br>
         <h2>Login with your school Gmail account.</h2>      
         <div class="login-section">
             <div id="g_id_onload" 

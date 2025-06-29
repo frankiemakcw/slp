@@ -12,108 +12,52 @@ h2 {
 }
 
 .container {
-    width: 95%;
-    max-width: 1200px;
-    min-width: 500px;
-    margin-inline: auto;
-    padding-inline: 1rem;
+    max-width: 1000px;
+    min-width: 700px;
     background-color: white;
     padding: 20px;
-    margin: 0 auto 25px;
+    margin: 20px auto;
     border-radius: 10px;
     box-shadow: 0 10px 20px rgba(0,0,0,0.1);
 }
 
-.container-stuinfo {
+/* login */
+.g_id_signin {
+    margin: 10px auto;
+    width: fit-content;
+}
+
+/* student info */
+.container-space-between {
     display: flex;
     justify-content: space-between;
     align-items: flex-start; 
     flex-flow: row wrap;
 }
 
-.container-rowwrap {
-    flex-flow: row wrap;
-}
-
 .student-info {
     display: flex;
-    flex-direction: column; /* Stack items vertically */
-    gap: 8px; /* Space between info items */
+    flex-direction: column; 
+    gap: 8px; 
 }
 
 .action-buttons {
     display: flex;
     gap: 10px;
-    margin-top: 5px; /* Optional: Adjust vertical alignment */
+    flex-flow: row wrap;
 }
 
-/* login */
-.login-section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 1.5rem 0;
-}
-
-.g_id_signin {
-    margin-top: 1rem;
-}
-
-/* student info */
 .label {
     line-height: 2.2;
     padding-right: 1em; 
     font-weight: bold;
 }
 
-
-/* saved activities */
-#no-records-message {
-    color: #7f8c8d;
-    text-align: center;
-    font-style: italic;
-}
-
-.activities-table {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-}
-
-.activity-row {
-    display: flex;
-    flex-wrap: wrap; /* Allow wrapping to next line */
-    align-items: center;
-    padding: 0.75rem 0;
-    gap: 0.5rem; /* Add gap between items when they wrap */
-}
-
-.activity-row > div {
-    padding: 0 0.5rem;
-    white-space: normal; /* Allow text to wrap */
-    overflow: visible; /* Show all content */
-    text-overflow: clip; /* Don't use ellipsis */
-}
-
-.activity-card {
-    border-bottom: 1px solid #eee;
-    padding: 0 0 0.75rem 0;
-}
-
-.activity-name {
-    font-weight: bold;
-}
-
-.activity-organizer {
-    font-style: italic;
-}
-
 /* show reflection on main.php */
 #reflection {
     font-family: Arial, sans-serif;
     white-space: pre-wrap; /* Preserve line breaks but wrap long lines */
-    padding: 1rem;
+    padding: 1em;
     line-height: 1.5;
 }
 
@@ -127,12 +71,6 @@ h2 {
     font-family: Arial, sans-serif;
     font-size: 16px;
     resize: none;
-}
-
-.word-count {
-    color: #313131;
-    font-size: 14px;
-    margin-top: 5px;
 }
 
 /* New activity */
@@ -198,11 +136,6 @@ input[type="date"], input[type="text"] {
     margin: 10px;
 }
 
-.action-buttons {
-    display: flex;
-    gap: 10px;
-}
-
 button {
     padding: 10px 20px;
     border: none;
@@ -257,14 +190,6 @@ button {
     background-color: #945a23;
 }
 
-
-/* Buttons for activities*/
-.activity-actions {
-    flex: 0 0 150px;
-    display: flex;
-    gap: 0.5rem;
-}
-
 .btn-red {
     background-color: #f44336;
     color: white;
@@ -297,6 +222,7 @@ li {
     font-weight: bold;
 }
 
+/* saved activities */
 .activity-table {
     min-width: 500px;
     width: 100%;
@@ -322,4 +248,10 @@ li {
 
 .activity-table tbody tr:hover {
     background-color: #f1f1f1;
+}
+
+#no-records-message {
+    color: #7f8c8d;
+    text-align: center;
+    font-style: italic;
 }
