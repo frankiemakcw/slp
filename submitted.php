@@ -92,7 +92,7 @@
                 </tbody>
             </table>
         <?php else: ?>
-            <p>No activities saved yet.</p>
+            <p id="no-records-message">No activities saved yet.</p>
         <?php endif; ?>
     </div>
 
