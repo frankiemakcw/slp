@@ -18,16 +18,28 @@
                     <div class="filter-row">
                         <label for="class">Filter by Class:</label>
                         <select name="class" id="class">
-                            <option value="all">All Classes</option>
+                            <?php if ($identity == 3): ?>
+                                <option value="all" <?= $selectedClass === 'all' ? 'selected' : '' ?>>All Classes</option>
+                            <?php endif; ?>
+                            
                             <?php
-                            // Get distinct classes for dropdown
-                            $classStmt = $pdo->query("SELECT DISTINCT class FROM student ORDER BY class");
+                            if ($identity == 2) {
+                                $classStmt = $pdo->prepare("SELECT DISTINCT stu.class 
+                                                        FROM student stu
+                                                        INNER JOIN teacher t ON stu.class = t.class
+                                                        WHERE t.id = ?");
+                                $classStmt->execute([$id]);
+                            } else {
+                                $classStmt = $pdo->query("SELECT DISTINCT class FROM student ORDER BY class");
+                            }
+                            
                             $classes = $classStmt->fetchAll(PDO::FETCH_COLUMN);
                             
                             foreach ($classes as $class) {
                                 $selected = ($class == $selectedClass) ? 'selected' : '';
                                 echo "<option value='$class' $selected>$class</option>";
                             }
+                        
                             ?>
                         </select>
                     </div>
@@ -48,19 +60,15 @@
                 <a href="logout.php" class="logout-btn">Log Out</a>
             </div>
         </div>
+
+        <div class="action-buttons">
+            <button id="downloadAll" class="btn">Download All Submitted Files</button>
+            <button id="sortByTime" class="btn">
+                <?= (isset($_GET['sort']) && $_GET['sort'] === 'time_desc') ? 'Sort by Class Number' : 'Sort by Submission Time' ?>
+            </button>
+        </div>
         
         <?php if (!empty($records)): ?>
-            <div class="action-buttons">
-                <?php if ($submissionStatus === 'submitted'): ?>
-                    <button id="downloadAll" class="btn">Download All Submitted Files</button>
-                <?php endif; ?>
-                <?php if ($submissionStatus === 'submitted'): ?>
-                    <button id="sortByTime" class="btn">
-                        <?= (isset($_GET['sort']) && $_GET['sort'] === 'time_desc') ? 'Sort by Class Number' : 'Sort by Submission Time' ?>
-                    </button>
-                <?php endif; ?>
-            </div>
-            
             <table>
                 <thead>
                     <tr>

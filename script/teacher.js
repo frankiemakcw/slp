@@ -12,16 +12,16 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Show/hide download all button
         if (downloadAllBtn) {
-            downloadAllBtn.style.display = statusFilter === 'submitted' ? 'block' : 'none';
+            downloadAllBtn.style.display = statusFilter !== 'not_submitted' ? 'block' : 'none';
         }
         
         // Show/hide sort button
         if (sortByTimeBtn) {
-            sortByTimeBtn.style.display = statusFilter === 'submitted' ? 'block' : 'none';
+            sortByTimeBtn.style.display = statusFilter !== 'not_submitted' ? 'block' : 'none';
         }
         
         // Reset sorting to default when status is not "submitted"
-        if (statusFilter !== 'submitted' && sortInput.value === 'time_desc') {
+        if (statusFilter === 'not_submitted' && sortInput.value === 'time_desc') {
             sortInput.value = '';
             // Update button text if visible (though it shouldn't be visible in this case)
             if (sortByTimeBtn) {
@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const currentSort = sortInput.value;
             
             // Only allow sorting if status is "submitted"
-            if (statusSelect.value === 'submitted') {
+            if (statusSelect.value !== 'not_submitted') {
                 // Toggle between time sort and class sort
                 if (currentSort === 'time_desc') {
                     sortInput.value = ''; // Default sort (class number)
