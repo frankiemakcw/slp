@@ -82,11 +82,11 @@
                         }
                     ?>
                         <tr>
-                            <td><?= $counter++ ?>.</td>
-                            <td><?= htmlspecialchars($dateDisplay) ?></td>
-                            <td><?= htmlspecialchars($activity['activity_name']) ?></td>
-                            <td><?= htmlspecialchars($activity['organizer']) ?></td>
-                            <td><?= htmlspecialchars($activity['role']) ?></td>
+                            <td data-label="No."><?= $counter++ ?></td>
+                            <td data-label="Date"><?= htmlspecialchars($dateDisplay) ?></td>
+                            <td data-label="Activity"><?= htmlspecialchars($activity['activity_name']) ?></td>
+                            <td data-label="Organizer"><?= htmlspecialchars($activity['organizer']) ?></td>
+                            <td data-label="Role"><?= htmlspecialchars($activity['role']) ?></td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
@@ -110,9 +110,8 @@
     <?php endif; ?>
 
     <div class="container">
-        <p style="text-align: center;">Submitted at <?= htmlspecialchars($submissionTime) ?>.</p>
-        <p style="text-align: center;">You are advised to download the submission for your records.</p>
-        <p style="text-align: center;">If you would like to edit your SLP, please discard the submission.</p>
+        <p style="text-align: center;">Successfully submitted at <?= htmlspecialchars($submissionTime) ?>. Please download the PDF for your records.</p>
+        <p style="text-align: center;">If you wish to make changes to your SLP, please discard this submission and resubmit.</p>
         <div class="form-actions">
             <a href="<?php echo $filepath; ?>"  target="_blank">
                 <button class="btn-blue">View Submission</button>

@@ -52,8 +52,8 @@ function setupPDFDocument(data) {
     return doc;
 }
 
-// Common function to generate activities page
-function generateActivitiesPage(doc, data) {
+// Common function to generate activities page with warning checks
+function generateActivitiesPage(doc, data, isPreview = false) {
     const { activities } = data;
     
     generatePDFHeader(doc, data);
@@ -115,16 +115,18 @@ function generateActivitiesPage(doc, data) {
         margin: { left: 18, right: 18 },
         didDrawPage: (data) => {
             // Check if the table has reached or exceeded our threshold
-            if (data.cursor.y >= 239) {
+            if (data.cursor.y >= 239 && !isPreview) {
                 throw new Error('Warning: Too many activities. Please preview the PDF and reduce the number of activities.');
+            }
+            if (data.cursor.y >= 239 && isPreview) {
+                alert('Warning: Too many activities. Please preview the PDF and reduce the number of activities.');
             }
         }
     });
-    
 }
 
-// Common function to generate reflections page
-function generateReflectionsPage(doc, data) {
+// Common function to generate reflections page with warning checks
+function generateReflectionsPage(doc, data, isPreview = false) {
     const { reflection } = data;
     
     doc.addPage();
@@ -148,11 +150,12 @@ function generateReflectionsPage(doc, data) {
     const lines = doc.splitTextToSize(reflection, 170);
     
     // Check if text will exceed available space
-    if (lines.length > 43) {
+    if (lines.length > 43 && !isPreview) {
         throw new Error('Warning: Your reflection is too long. Please preview the PDF and shorten the reflection.');
     }
-
-    
+    if (lines.length > 43 && isPreview) {
+        alert('Warning: Your reflection is too long. Please preview the PDF and shorten the reflection.');
+    }
 }
 
 async function submitPDF() {
@@ -164,10 +167,35 @@ async function submitPDF() {
         }
         const data = await response_info.json();
         
-        const doc = setupPDFDocument(data);
-        generateActivitiesPage(doc, data);
+        // Check for empty activities
+        if (!data.activities || data.activities.length === 0) {
+            throw new Error('You must add at least one activity before submission.');
+        }
+
+        // Check for empty reflection if required (for classes 3 or 6)
         if (data.stuClass.startsWith('3') || data.stuClass.startsWith('6')) {
-            generateReflectionsPage(doc, data);
+            if (!data.reflection || data.reflection.trim() === '') {
+                throw new Error('Personal reflection is required. Please complete it before submission.');
+            }
+        }
+        
+        // Create a test document to check for errors
+        const testDoc = setupPDFDocument(data);
+        try {
+            generateActivitiesPage(testDoc, data, false); // false = not preview mode
+            if (data.stuClass.startsWith('3') || data.stuClass.startsWith('6')) {
+                generateReflectionsPage(testDoc, data, false); // false = not preview mode
+            }
+        } catch (error) {
+            alert(error.message);
+            throw error; // Re-throw to prevent submission
+        }
+        
+        // If we get here, all checks passed
+        const doc = setupPDFDocument(data);
+        generateActivitiesPage(doc, data, false);
+        if (data.stuClass.startsWith('3') || data.stuClass.startsWith('6')) {
+            generateReflectionsPage(doc, data, false);
         }
         
         // Generate PDF blob
@@ -205,42 +233,47 @@ async function submitPDF() {
 }
 
 async function savepreview() {
-
-    const response_info = await fetch('getdata_json.php');
-    if (!response_info.ok) {
-        throw new Error('Network response was not ok');
-    }
-    const data = await response_info.json();
-    
-    const doc = setupPDFDocument(data);
     try {
-        generateActivitiesPage(doc, data);
-    } catch (activitiesError) {
-
-    }
-
-    if (data.stuClass.startsWith('3') || data.stuClass.startsWith('6')) {
-        try {
-            generateReflectionsPage(doc, data);
-        } catch (reflectionsError) {
-
+        const response_info = await fetch('getdata_json.php');
+        if (!response_info.ok) {
+            throw new Error('Network response was not ok');
         }
-    }
-    
-    // Generate PDF blob
-    const pdfBlob = doc.output('blob');
-    
-    // Create FormData to send
-    const formData = new FormData();
-    formData.append('pdf', pdfBlob, `slp.pdf`);
-    formData.append('student_id', data.stuID);
-    
-    // Send to server
-    const response = await fetch('save_preview.php', {
-        method: 'POST',
-        body: formData
-    });      
+        const data = await response_info.json();
         
+        const doc = setupPDFDocument(data);
+        try {
+            generateActivitiesPage(doc, data, true); // true = preview mode
+        } catch (activitiesError) {
+            // In preview mode, we still generate but show the warning
+            console.warn(activitiesError.message);
+        }
+
+        if (data.stuClass.startsWith('3') || data.stuClass.startsWith('6')) {
+            try {
+                generateReflectionsPage(doc, data, true); // true = preview mode
+            } catch (reflectionsError) {
+                // In preview mode, we still generate but show the warning
+                console.warn(reflectionsError.message);
+            }
+        }
+        
+        // Generate PDF blob
+        const pdfBlob = doc.output('blob');
+        
+        // Create FormData to send
+        const formData = new FormData();
+        formData.append('pdf', pdfBlob, `slp.pdf`);
+        formData.append('student_id', data.stuID);
+        
+        // Send to server
+        const response = await fetch('save_preview.php', {
+            method: 'POST',
+            body: formData
+        });      
+    } catch (error) {
+        console.error('Preview error:', error);
+        alert('Error generating preview: ' + error.message);
+    }
 }
 
 document.addEventListener('DOMContentLoaded', savepreview);

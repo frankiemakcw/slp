@@ -1,5 +1,5 @@
 document.getElementById("discardsubmission").addEventListener("click", function() {
-    const userConfirmed = confirm("Your submission will be discarded and you must submit a new file again before the deadline. Are you sure to discard the submission?");
+    const userConfirmed = confirm("Your submission will be discarded and you must resubmit before the deadline. Are you sure to discard this submission?");
     if (userConfirmed) {
         fetch('discard_submission.php')
             .then(response => response.json())
