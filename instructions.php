@@ -39,7 +39,7 @@
             </li>
             <li>Check spelling. Use full names and capitalize the first letter of activity and organization names.</li>
             <li>For school events, refer to the OLE calendar and write "Ying Wa Girls' School" as the organizer without specifying any departments or teachers.</li>
-            <li>You are advised to fill in at least 10 items. You may include more than 10 if you wish but ensure the items fit properly without overlapping other text. Only select meaningful activities, rather than recording all activities.<strong>Quality is more important than quantity.</strong></li>
+            <li>You are advised to fill in 10 to 15 items. Ensure the items fit properly in one page without overlapping other text. <strong>Only select meaningful activities, rather than recording all activities.</strong></li>
             <li>若活動只有中文名稱，請使用中文紀錄活動籌辦者及角色。</li>
         </ul>
      

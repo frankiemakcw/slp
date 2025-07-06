@@ -1,52 +1,8 @@
 <?php
-session_start();
 
-if (!isset($_SESSION['user'])) {
-    header('Location: index.php');
-    exit;
-}
+require_once 'getdata_teacher.php';
 
-require_once 'dbconnect.php';
-
-try {
-    // Get filters from URL
-    $selectedClass = $_GET['class'] ?? 'all';
-    $submissionStatus = $_GET['status'] ?? 'all';
-    
-    // Build the query (same as teacher_getdata.php)
-    $sql = "SELECT stu.class, stu.class_num, stu.name, sub.file_path, sub.submitted_at
-            FROM student stu
-            LEFT JOIN submission sub ON stu.sid = sub.sid AND sub.is_active = 1";
-    
-    $where = [];
-    $params = [];
-    
-    if ($selectedClass !== 'all') {
-        $where[] = "stu.class = :class";
-        $params[':class'] = $selectedClass;
-    }
-    
-    if ($submissionStatus !== 'all') {
-        if ($submissionStatus === 'submitted') {
-            $where[] = "sub.sid IS NOT NULL";
-        } elseif ($submissionStatus === 'not_submitted') {
-            $where[] = "sub.sid IS NULL";
-        }
-    }
-    
-    if (!empty($where)) {
-        $sql .= " WHERE " . implode(" AND ", $where);
-    }
-    
-    $sql .= " ORDER BY stu.class ASC, stu.class_num ASC";
-    
-    $stmt = $pdo->prepare($sql);
-    foreach ($params as $key => $value) {
-        $stmt->bindValue($key, $value);
-    }
-    $stmt->execute();
-    $records = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    
+try {   
     // Check if there are any files to download
     $hasFiles = false;
     foreach ($records as $row) {

@@ -48,12 +48,9 @@ if (!isset($_SESSION['user'])) {
 }
 
 $user = $_SESSION['user'];
+$identity = $user['identity'];
 
-// Extract SID from email
-$email = $user['email'];
-$sid = strtok($email, '@');
-
-if (strlen($sid) > 4) {
+if ($identity != 2 && $identity != 3) {
     header("Location: redirect.php");
     exit;
 }

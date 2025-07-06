@@ -10,7 +10,7 @@
     <div class="container">
         <h2>Ying Wa Girls' School</h2>
         <h2>Student Learning Profile</h2>
-        <p>The website is temporarily closed.</p>
+        <p>Access Denied.</p>
         <p>If you have any questions, please contact Mr. Mak (FM) at fm@ywgs.edu.hk.</p>
     </div>
 </body>

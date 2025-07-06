@@ -39,13 +39,32 @@ try {
 
         // Regenerate session ID for security
         session_regenerate_id(true);
+
+        $sid = strtok($email, '@'); // Gets everything before '@'
+
+        $stmt = $pdo->prepare("SELECT `sid` FROM `student` WHERE sid = ?");
+        $stmt->execute([$sid]);
+        $studentData = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        $stmt = $pdo->prepare("SELECT `admin` FROM `teacher` WHERE id = ?");
+        $stmt->execute([$sid]);
+        $teacherData = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($studentData !== false) {
+            $identity = 1;  // Student
+        } else if ($teacherData !== false) {
+            if ($teacherData['admin'] == 1) {
+                $identity = 3;  // Admin teacher
+            } else {
+                $identity = 2;  // Non-admin teacher
+            }
+        } else {
+            $identity = 0;
+        }
         
         $_SESSION['user'] = [
-            'sub' => $sub,
-            'name' => $name,
             'email' => $email,
-            'logged_in' => true,
-            'last_activity' => time()
+            'identity' => $identity
         ];
         
         echo json_encode(['success' => true, 'user' => $_SESSION['user']]);

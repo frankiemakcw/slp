@@ -51,8 +51,9 @@
     // Extract SID from email
     $email = $user['email'];
     $sid = strtok($email, '@'); // Gets everything before '@'
+    $identity = $user['identity'];
 
-    if (strlen($sid) <= 4) {
+    if ($identity != 1) {
         header("Location: redirect.php");
         exit;
     }
