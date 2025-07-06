@@ -1,5 +1,5 @@
 <?php
-    require_once 'teacher_getdata.php';
+    require_once 'getdata_teacher.php';
 ?>
 
 <!DOCTYPE html>

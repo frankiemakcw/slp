@@ -6,12 +6,6 @@ if (!isset($_SESSION['user'])) {
     exit;
 }
 
-$user = $_SESSION['user'];
-
-// Extract SID from email (same validation as teacher_getdata.php)
-$email = $user['email'];
-$sid = strtok($email, '@');
-
 require_once 'dbconnect.php';
 
 try {

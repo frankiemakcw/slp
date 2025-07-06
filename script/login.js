@@ -11,7 +11,7 @@ async function handleCredentialResponse(response) {
         const data = await serverResponse.json();
 
         if (data.success) {
-            window.location.href = 'instructions.php';
+            window.location.href = 'redirect.php';
         } else {
             alert('Login failed: ' + (data.message || 'Unknown error'));
         }

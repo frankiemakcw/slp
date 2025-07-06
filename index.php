@@ -1,11 +1,5 @@
 <?php
-    require_once 'dbconnect.php';
-    session_start();
-
-    if (isset($_SESSION['user'])) {
-        header('Location: main.php');
-        exit;
-    }
+    require_once 'getdata_login.php';
 ?>
 
 <!DOCTYPE html>
