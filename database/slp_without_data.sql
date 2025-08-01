@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jun 25, 2025 at 03:48 PM
+-- Generation Time: Jul 06, 2025 at 02:49 PM
 -- Server version: 8.0.17
 -- PHP Version: 7.3.10
 
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `slprecord_2425`
+-- Database: `slp`
 --
 
 -- --------------------------------------------------------
@@ -49,17 +49,6 @@ CREATE TABLE `login` (
   `email` varchar(255) NOT NULL,
   `name` varchar(255) NOT NULL,
   `login_time` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `preview`
---
-
-CREATE TABLE `preview` (
-  `sid` varchar(255) NOT NULL,
-  `preview_path` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
@@ -101,6 +90,18 @@ CREATE TABLE `submission` (
   `is_active` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `teacher`
+--
+
+CREATE TABLE `teacher` (
+  `id` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `admin` int(11) NOT NULL,
+  `class` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
 --
 -- Indexes for dumped tables
 --
@@ -118,12 +119,6 @@ ALTER TABLE `login`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `preview`
---
-ALTER TABLE `preview`
-  ADD PRIMARY KEY (`sid`);
-
---
 -- Indexes for table `reflection`
 --
 ALTER TABLE `reflection`
@@ -139,6 +134,12 @@ ALTER TABLE `student`
 -- Indexes for table `submission`
 --
 ALTER TABLE `submission`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `teacher`
+--
+ALTER TABLE `teacher`
   ADD PRIMARY KEY (`id`);
 
 --
