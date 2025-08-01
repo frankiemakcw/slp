@@ -40,6 +40,8 @@
                 data-logo_alignment="left">
             </div>
         </div>
+        <br>
+        <h4 style="text-align: center;">If you have any questions, please contact Mr. Mak (FM) at fm@ywgs.edu.hk.</h4>
     </div>
     <script src="script/login.js"></script>
 </body>
