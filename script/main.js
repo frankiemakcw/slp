@@ -1,7 +1,7 @@
 const { jsPDF } = window.jspdf;
 
 // Common function to generate PDF header and student info
-function generatePDFHeader(doc, data, pageY = 20) {
+function generatePDFHeader(doc, data, pageY = 15) {
     const { stuName, stuClass, stuClassNum, stuID, start_year, end_year, issue_date } = data;
 
     // Header
@@ -28,8 +28,8 @@ function generatePDFHeader(doc, data, pageY = 20) {
 
 // Common function to generate PDF footer
 function generatePDFFooter(doc) {
-    doc.line(130, 275, 190, 275);
-    doc.text('STUDENT\'S SIGNATURE', 160, 280, { align: 'center' });
+    doc.line(130, 280, 190, 280);
+    doc.text('STUDENT\'S SIGNATURE', 160, 285, { align: 'center' });
 }
 
 // Common function to setup PDF document
@@ -59,15 +59,15 @@ function generateActivitiesPage(doc, data, isPreview = false) {
     generatePDFHeader(doc, data);
     
     // Section header
-    doc.text('PART I: ACTIVITIES / PROGRAMMES / COMPETITIONS', 15, 55);
+    doc.text('PART I: ACTIVITIES / PROGRAMMES / COMPETITIONS', 15, 50);
 
     // claim
-    doc.text('I hereby declare that I have participated in the activities above.', 18, 245);
-    doc.line(18, 239.5, 192, 239.5);
-    doc.line(18, 239, 192, 239);
+    doc.text('I hereby declare that I have participated in the activities above.', 18, 255);
+    doc.line(18, 249.5, 192, 249.5);
+    doc.line(18, 249, 192, 249);
 
     // Draw rectangle
-    doc.rect(15, 60, 180, 190, 'S');
+    doc.rect(15, 53, 180, 205, 'S');
 
     generatePDFFooter(doc);
     
@@ -86,7 +86,7 @@ function generateActivitiesPage(doc, data, isPreview = false) {
     doc.autoTable({
         head: [['', 'DATE', 'ACTIVITY / PROGRAMME / COMPETITION', 'ORGANIZED BY', 'ROLE']],
         body: tableData,
-        startY: 65,
+        startY: 57,
         columnStyles: {
             0: { cellWidth: 8 },  
             1: { cellWidth: 26 },
@@ -104,7 +104,7 @@ function generateActivitiesPage(doc, data, isPreview = false) {
         },
         headStyles: {
             fillColor: false,
-            cellPadding: { top: 1, right: 1.5, bottom: 1, left: 1.5 },
+            cellPadding: { top: 1, right: 1.5, bottom: 2.5, left: 1.5 },
             fontStyle: 'normal',
             halign: 'left' 
         },
@@ -115,10 +115,10 @@ function generateActivitiesPage(doc, data, isPreview = false) {
         margin: { left: 18, right: 18 },
         didDrawPage: (data) => {
             // Check if the table has reached or exceeded our threshold
-            if (data.cursor.y >= 239 && !isPreview) {
+            if (data.cursor.y >= 250 && !isPreview) {
                 throw new Error('Warning: Too many activities. Please preview the PDF and reduce the number of activities.');
             }
-            if (data.cursor.y >= 239 && isPreview) {
+            if (data.cursor.y >= 250 && isPreview) {
                 alert('Warning: Too many activities. Please preview the PDF and reduce the number of activities.');
             }
         }
@@ -133,15 +133,15 @@ function generateReflectionsPage(doc, data, isPreview = false) {
     generatePDFHeader(doc, data);
     
     // Section header
-    doc.text('PART II:  PERSONAL REFLECTIONS', 15, 55);
+    doc.text('PART II:  PERSONAL REFLECTIONS', 15, 50);
 
     // Draw rectangle
-    doc.rect(15, 60, 180, 190, 'S');
+    doc.rect(15, 53, 180, 205, 'S');
 
     generatePDFFooter(doc);
 
     // Reflection
-    doc.text(reflection, 20, 68, {
+    doc.text(reflection, 20, 61, {
         maxWidth: 170,
         align: 'left'
     });
@@ -150,10 +150,10 @@ function generateReflectionsPage(doc, data, isPreview = false) {
     const lines = doc.splitTextToSize(reflection, 170);
     
     // Check if text will exceed available space
-    if (lines.length > 43 && !isPreview) {
+    if (lines.length > 47 && !isPreview) {
         throw new Error('Warning: Your reflection is too long. Please preview the PDF and shorten the reflection.');
     }
-    if (lines.length > 43 && isPreview) {
+    if (lines.length > 47 && isPreview) {
         alert('Warning: Your reflection is too long. Please preview the PDF and shorten the reflection.');
     }
 }
