@@ -2,7 +2,7 @@ body {
     font-family: Arial, sans-serif;
     background-color: #f5f5f5;
     margin: 0;
-    padding: 0;
+    padding: 15px;
 }
 
 h2 {
@@ -179,6 +179,7 @@ button {
 }
 
 .small-btn {
+    margin: 3px;
     padding: 5px 10px;
 }
 
@@ -192,12 +193,12 @@ button {
 }
 
 .btn-blue {
-    background-color: #3498db;
+    background-color: #1a73e9;
     color: white;
 }
 
 .btn-blue:hover {
-    background-color: #2980b9;
+    background-color: #165fbe;
 }
 
 .btn-purple {
@@ -222,7 +223,7 @@ button {
 /* instructions */
 
 h3 {
-    color: #2980b9;
+    color: #1a73e9;
     margin-top: 1.5em; /* More space before headings */
     margin-bottom: 0.75em; /* Space after headings */
 }
@@ -282,4 +283,8 @@ li {
         font-weight: bold;
         width: 95px; 
     }
+
 }
+
+
+

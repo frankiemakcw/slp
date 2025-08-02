@@ -20,7 +20,7 @@
         <h2>Student Learning Profile (SLP)</h2>
         <h2>20<?= htmlspecialchars($start_year) ?>-20<?= htmlspecialchars($end_year) ?></h2>
         <br>
-        <h3 style="text-align: center;">Login with your school Gmail account.</h3>      
+        <h3 style="text-align: center;">Sign in with your school Google account.</h3>      
         <div class="login-section">
             <div id="g_id_onload" 
                 data-client_id="1025312216370-1ba1liogt0rbgunrf7985rqutesratsv.apps.googleusercontent.com"
@@ -34,12 +34,14 @@
             <div class="g_id_signin" 
                 data-type="standard" 
                 data-shape="rectangular" 
-                data-theme="outline" 
+                data-theme="filled_blue" 
                 data-text="signin_with"
                 data-size="large" 
+                data-locale="en"
                 data-logo_alignment="left">
             </div>
         </div>
+        <br>
         <br>
         <p style="text-align: center;">For inquiries, please contact Mr. Mak (FM) at fm@ywgs.edu.hk.</p>
     </div>

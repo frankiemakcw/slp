@@ -187,7 +187,6 @@ async function submitPDF() {
                 generateReflectionsPage(testDoc, data, false); // false = not preview mode
             }
         } catch (error) {
-            alert(error.message);
             throw error; // Re-throw to prevent submission
         }
         
