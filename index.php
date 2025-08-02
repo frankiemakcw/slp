@@ -12,9 +12,6 @@
     <script src="https://accounts.google.com/gsi/client" async defer></script>
 </head>
 <body>
-
-    
-
     <div class="container">
         <h2>Ying Wa Girls' School</h2>
         <h2>Student Learning Profile (SLP)</h2>
